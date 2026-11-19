@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vice Cover Maker — GTA 6 style cover studio</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><span class="brand-mark">VICE</span> Cover Maker</div>
+  <div class="top-actions">
+    <button id="btn-undo" type="button" title="Undo">Undo</button>
+    <button id="btn-redo" type="button" title="Redo">Redo</button>
+    <button id="btn-export-square" type="button">PNG 1080×1080</button>
+    <button id="btn-export-portrait" type="button">PNG 1080×1350</button>
+    <button id="btn-export-wide" type="button">PNG 1920×1080</button>
+  </div>
+</header>
+
+<main class="workspace">
+  <section class="stage-wrap">
+    <div id="dropzone" class="dropzone">
+      <canvas id="cover" width="1080" height="1080"></canvas>
+      <p class="drop-hint">Drop photos here or use Upload below — drag a photo to move it, scroll to zoom.</p>
+    </div>
+    <div class="panel-strip" id="panel-strip" aria-label="Panels"></div>
+  </section>
+
+  <aside class="controls">
+    <section class="group">
+      <h2>Photos</h2>
+      <label class="file-btn">Upload photos
+        <input id="file-input" type="file" accept="image/*" multiple hidden>
+      </label>
+      <p class="note">Click a panel, then drag on the canvas to move its photo. Scroll to zoom, or use the sliders.</p>
+      <div class="field">
+        <label for="sel-photo">Panel photo</label>
+        <select id="sel-photo"></select>
+      </div>
+      <div class="field">
+        <label for="rng-zoom">Zoom <span id="zoom-val">100%</span></label>
+        <input id="rng-zoom" type="range" min="50" max="300" value="100">
+      </div>
+      <div class="field">
+        <label for="rng-rot">Tilt <span id="rot-val">0°</span></label>
+        <input id="rng-rot" type="range" min="-25" max="25" value="0">
+      </div>
+    </section>
+
+    <section class="group">
+      <h2>Layout</h2>
+      <div class="btn-row" id="layout-row">
+        <button type="button" data-layout="hero3" class="active">Hero + 3</button>
+        <button type="button" data-layout="grid4">Four grid</button>
+        <button type="button" data-layout="full">Full bleed</button>
+        <button type="button" data-layout="snapshots">Snapshots</button>
+        <button type="button" data-layout="grid9">Nine grid</button>
+      </div>
+    </section>
+
+    <section class="group">
+      <h2>Grade</h2>
+      <div class="btn-row" id="grade-row">
+        <button type="button" data-grade="sunset" class="active">Sunset</button>
+        <button type="button" data-grade="neon">Neon</button>
+        <button type="button" data-grade="vice">Vice City</button>
+        <button type="button" data-grade="gold">Gold</button>
+        <button type="button" data-grade="night">Night</button>
+      </div>
+    </section>
+
+    <section class="group">
+      <h2>Titles</h2>
+      <div class="field">
+        <label for="inp-title">Main title</label>
+        <input id="inp-title" type="text" value="VICE CITY" maxlength="24">
+      </div>
+      <div class="field">
+        <label for="inp-sub">Neon subtitle</label>
+        <input id="inp-sub" type="text" value="welcome to the sunshine state" maxlength="48">
+      </div>
+      <div class="field">
+        <label for="rng-grain">Grain <span id="grain-val">35%</span></label>
+        <input id="rng-grain" type="range" min="0" max="100" value="35">
+      </div>
+      <div class="field">
+        <label for="rng-vignette">Vignette <span id="vig-val">55%</span></label>
+        <input id="rng-vignette" type="range" min="0" max="100" value="55">
+      </div>
+    </section>
+  </aside>
+</main>
+
+<footer class="foot">Vice Cover Maker — offline single-page studio. Photos stay in your browser; nothing is uploaded.</footer>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+@font-face {
+  font-family: 'Anton';
+  src: url('fonts/Anton-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Pacifico';
+  src: url('fonts/Pacifico-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --bg: #12081f;
+  --panel: #1d0f2e;
+  --panel-2: #261338;
+  --ink: #f6e9ff;
+  --muted: #b9a3cc;
+  --pink: #ff2e88;
+  --cyan: #22d3ee;
+  --gold: #f5b942;
+  --line: #3a2352;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  min-height: 100vh;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 18px;
+  background: linear-gradient(90deg, #2a0f45, #4a1042 55%, #0f2a3d);
+  border-bottom: 1px solid var(--line);
+  flex-wrap: wrap;
+}
+.brand { font-family: 'Anton', sans-serif; font-size: 22px; letter-spacing: 2px; }
+.brand-mark {
+  background: linear-gradient(180deg, #ff9ecf, var(--pink));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-right: 6px;
+}
+.top-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+button, .file-btn {
+  background: var(--panel-2);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+button:hover, .file-btn:hover { border-color: var(--pink); }
+button.active { background: var(--pink); border-color: var(--pink); color: #fff; }
+button:disabled { opacity: .45; cursor: default; }
+.file-btn { display: inline-block; text-align: center; }
+
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 18px;
+  padding: 18px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+@media (max-width: 860px) {
+  .workspace { grid-template-columns: 1fr; }
+}
+
+.stage-wrap { min-width: 0; }
+.dropzone {
+  position: relative;
+  background: #000;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.dropzone.drag-over { outline: 3px dashed var(--cyan); outline-offset: -6px; }
+#cover { display: block; width: 100%; height: auto; max-height: calc(100vh - 250px); margin: 0 auto; cursor: grab; touch-action: none; }
+#cover:active { cursor: grabbing; }
+.drop-hint {
+  position: absolute;
+  left: 10px;
+  top: 8px;
+  margin: 0;
+  font-size: 12px;
+  color: rgba(255, 255, 255, .75);
+  background: rgba(0, 0, 0, .45);
+  padding: 4px 8px;
+  border-radius: 6px;
+  pointer-events: none;
+}
+
+.panel-strip { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+.panel-chip {
+  border: 1px solid var(--line);
+  background: var(--panel);
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 13px;
+}
+.panel-chip.active { border-color: var(--cyan); color: var(--cyan); }
+
+.controls { display: flex; flex-direction: column; gap: 14px; }
+.group {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px;
+}
+.group h2 {
+  margin: 0 0 10px;
+  font-family: 'Anton', sans-serif;
+  font-size: 15px;
+  letter-spacing: 2px;
+  color: var(--cyan);
+}
+.btn-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.field { margin-top: 10px; }
+.field label { display: block; font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+.field input[type="text"], .field select {
+  width: 100%;
+  background: #0f0718;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 8px 10px;
+  font: inherit;
+}
+.field input[type="range"] { width: 100%; accent-color: var(--pink); }
+.note { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+.foot {
+  text-align: center;
+  color: var(--muted);
+  font-size: 12px;
+  padding: 14px 18px 22px;
+}
+
+/* Screenshot modes: full-bleed cover, no editor chrome. */
+body.shot-cover { background: #000; }
+body.shot-cover .topbar, body.shot-cover .controls,
+body.shot-cover .panel-strip, body.shot-cover .foot,
+body.shot-cover .drop-hint { display: none; }
+body.shot-cover .workspace { display: block; padding: 0; margin: 0; max-width: none; }
+body.shot-cover .stage-wrap { width: 100%; }
+body.shot-cover .dropzone { border: 0; border-radius: 0; }
+body.shot-cover #cover { width: 100vw; height: 100vh; max-height: none; object-fit: cover; }
